@@ -1,222 +1,327 @@
-# BotAlto - Telegram Bot Hosting Platform
+# BotAlto - Multi-Language Telegram Bot Hosting Platform
 
 ![BotAlto Logo](https://raw.githubusercontent.com/DevAryanPro/BotAlto-Telegram-Bot-Builder/refs/heads/main/Images/photo_2025-08-02_15-55-27.jpg)
 
-BotAlto is an open-source platform for hosting and managing Telegram bots with a user-friendly dashboard. It allows you to create, manage, and deploy multiple Telegram bots from a single interface, complete with custom command creation and real-time control.
+BotAlto is a comprehensive, enterprise-grade platform for hosting and managing Telegram bots with support for multiple programming languages. It provides a complete solution for bot development, deployment, monitoring, and management with real-time capabilities.
 
-## Features
+## 🚀 Features
 
-- 🚀 **Multi-Bot Management**: Host and control multiple Telegram bots simultaneously
-- 💻 **Web Dashboard**: Intuitive interface for managing all aspects of your bots
-- ⌨️ **Custom Commands**: Create and edit bot commands with JavaScript code
-- ⚡ **Real-time Control**: Start/stop bots instantly from the dashboard
-- 📊 **Command Preview**: See your command code directly in the dashboard
-- 🔒 **Simple Authentication**: Uses Telegram bot tokens for secure access
-- 🛠️ **Developer Friendly**: Write custom bot logic with JavaScript
+### Multi-Language Bot Support
+- **Python**: aiogram, pyrogram, python-telegram-bot
+- **JavaScript/Node.js**: Telegraf.js, node-telegram-bot-api
+- **PHP**: MadelineProto, telegram-bot-sdk
+- **Go**: telebot, tgbotapi
 
-## Installation
+### Core Platform Features
+- 🐳 **Docker Containerization**: Each bot runs in isolated containers
+- 🔐 **JWT Authentication**: Secure user authentication and authorization
+- 📊 **Real-time Monitoring**: Live logs, metrics, and status updates
+- 🔄 **Auto-restart**: Automatic recovery from crashes
+- 📈 **Resource Management**: CPU and memory limits per bot
+- 🌐 **Webhook & Polling**: Support for both modes
+- 📝 **Built-in Code Editor**: Monaco editor with syntax highlighting
+- ⚡ **Hot Reload**: Instant code updates without restart
+- 🔧 **Command Management**: Visual command creation and editing
+- 📋 **Task Scheduler**: Cron-based automated tasks
+- 🛡️ **Security**: Encrypted tokens, CSRF protection, rate limiting
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/ProKaiiddo/BotAlto
-   cd BotAlto
-   ```
+### Advanced Features
+- 🎯 **Role-based Access**: Owner, Developer, Viewer roles
+- 📱 **Real-time Notifications**: WebSocket-based live updates
+- 📊 **Analytics Dashboard**: Bot performance and usage metrics
+- 🔌 **Plugin Marketplace**: Reusable bot functions and extensions
+- 🚀 **CI/CD Integration**: GitHub Actions support
+- 📦 **Multi-source Deployment**: ZIP, GitHub, direct code upload
+- 🔍 **Health Monitoring**: Comprehensive system health checks
+- 📈 **Scaling**: Kubernetes manifests for production deployment
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+## 🏗️ Architecture
 
-3. [OPTIONAL] Create a `.env` file with your configuration:
-   ```env
-   PORT=3000
-   # Add other environment variables as needed
-   ```
-
-4. Start the server:
-   ```bash
-   node Backend/server.js
-   ```
-
-5. Access the dashboard at `http://localhost:3000`
-
-## Usage Guide
-
-## 🚀 Creating Commands
-
-1. Open the **Commands** card for your bot  
-2. Enter **command name** (omit `/`)  
-3. Paste **JavaScript** code (Telegraf context)  
-4. Hit **Save** → instant hot-reload
-
----
-
-## 📖 Command Examples
-
-### 1. Basic Greeting
-```javascript
-ctx.reply('Hello 👋, welcome to BotAlto!');
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │    │   Backend       │    │   Database      │
+│   (React)       │◄──►│   (Nest.js)     │◄──►│   (PostgreSQL)  │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   NGINX         │    │   Redis         │    │   Docker        │
+│   (Reverse      │    │   (Cache/Queue) │    │   (Bot          │
+│    Proxy)       │    │                 │    │    Containers)  │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-### 2. User Info
-```javascript
-ctx.replyWithMarkdown(
-  `*User Info*:\n- ID: ${ctx.from.id}\n- Name: ${ctx.from.first_name}\n- Username: @${ctx.from.username || 'none'}`
-);
+## 📋 Prerequisites
+
+- Docker & Docker Compose
+- Node.js 18+ (for development)
+- PostgreSQL 15+
+- Redis 7+
+- Git
+
+## 🚀 Quick Start
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/botalto-platform.git
+cd botalto-platform
 ```
 
-### 3. Send Image
-```javascript
-ctx.replyWithPhoto(
-  { url: 'https://picsum.photos/600/400' },
-  { caption: '🖼️ Random image via BotAlto' }
-);
+### 2. Environment Setup
+```bash
+# Copy environment template
+cp .env.example .env
+
+# Edit environment variables
+nano .env
 ```
 
-### 4. Inline Keyboard Menu
+### 3. Start the Platform
+```bash
+# Start all services
+docker-compose up -d
+
+# Check service status
+docker-compose ps
+
+# View logs
+docker-compose logs -f backend
+```
+
+### 4. Access the Platform
+- **Frontend**: http://localhost:3001
+- **Backend API**: http://localhost:3000/api/v1
+- **Health Check**: http://localhost:3000/api/v1/health
+- **Grafana**: http://localhost:3002 (admin/admin123)
+
+## 🔧 Development Setup
+
+### Backend Development
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run start:dev
+
+# Run tests
+npm run test
+
+# Build for production
+npm run build
+```
+
+### Frontend Development
+```bash
+cd frontend
+npm install
+npm start
+```
+
+### Database Migrations
+```bash
+# Generate migration
+npm run db:generate -- src/database/migrations/CreateInitialTables
+
+# Run migrations
+npm run db:migrate
+
+# Revert migration
+npm run db:revert
+```
+
+## 📚 API Documentation
+
+### Authentication Endpoints
+```http
+POST /api/v1/auth/login
+POST /api/v1/auth/register
+POST /api/v1/auth/refresh
+POST /api/v1/auth/logout
+```
+
+### Bot Management Endpoints
+```http
+GET    /api/v1/bots
+POST   /api/v1/bots
+GET    /api/v1/bots/:id
+PUT    /api/v1/bots/:id
+DELETE /api/v1/bots/:id
+POST   /api/v1/bots/:id/start
+POST   /api/v1/bots/:id/stop
+POST   /api/v1/bots/:id/restart
+GET    /api/v1/bots/:id/logs
+GET    /api/v1/bots/:id/stats
+```
+
+### Command Management Endpoints
+```http
+GET    /api/v1/bots/:botId/commands
+POST   /api/v1/bots/:botId/commands
+PUT    /api/v1/bots/:botId/commands/:id
+DELETE /api/v1/bots/:botId/commands/:id
+```
+
+## 🐳 Docker Deployment
+
+### Production Deployment
+```bash
+# Build and start production services
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
+# Scale backend services
+docker-compose up -d --scale backend=3
+```
+
+### Kubernetes Deployment
+```bash
+# Apply Kubernetes manifests
+kubectl apply -f k8s/
+
+# Check deployment status
+kubectl get pods -n botalto
+```
+
+## 🔒 Security Features
+
+- **JWT Authentication**: Secure token-based authentication
+- **Password Hashing**: bcrypt with configurable rounds
+- **Rate Limiting**: API rate limiting with NGINX
+- **CORS Protection**: Configurable cross-origin policies
+- **Input Validation**: Comprehensive request validation
+- **SQL Injection Protection**: TypeORM with parameterized queries
+- **XSS Protection**: Security headers and input sanitization
+- **CSRF Protection**: Built-in CSRF token validation
+
+## 📊 Monitoring & Logging
+
+### Health Checks
+- **Application Health**: `/api/v1/health`
+- **Readiness Check**: `/api/v1/health/ready`
+- **Liveness Check**: `/api/v1/health/live`
+
+### Metrics
+- **Prometheus**: http://localhost:9090
+- **Grafana**: http://localhost:3002
+- **Custom Metrics**: Bot performance, resource usage
+
+### Logging
+- **Structured Logging**: Winston with JSON format
+- **Log Rotation**: Daily rotation with compression
+- **Log Levels**: DEBUG, INFO, WARN, ERROR, FATAL
+
+## 🔧 Configuration
+
+### Environment Variables
+```env
+# Application
+NODE_ENV=production
+PORT=3000
+API_PREFIX=api/v1
+
+# Database
+DB_HOST=postgres
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=password
+DB_DATABASE=botalto
+
+# Redis
+REDIS_HOST=redis
+REDIS_PORT=6379
+REDIS_PASSWORD=redis123
+
+# JWT
+JWT_SECRET=your-super-secret-jwt-key
+JWT_EXPIRES_IN=7d
+
+# Docker
+DOCKER_HOST=unix:///var/run/docker.sock
+DOCKER_NETWORK=botalto-network
+
+# Security
+BCRYPT_ROUNDS=12
+CORS_ORIGIN=https://your-domain.com
+```
+
+## 🚀 Bot Development Examples
+
+### Python Bot (aiogram)
+```python
+import asyncio
+from aiogram import Bot, Dispatcher, types
+from aiogram.filters import Command
+import os
+
+bot = Bot(token=os.getenv('BOT_TOKEN'))
+dp = Dispatcher()
+
+@dp.message(Command("start"))
+async def start_command(message: types.Message):
+    await message.answer("Hello from BotAlto!")
+
+@dp.message(Command("help"))
+async def help_command(message: types.Message):
+    await message.answer("This is a help message.")
+
+async def main():
+    await dp.start_polling(bot)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+### JavaScript Bot (Telegraf)
 ```javascript
-ctx.reply('Choose an option:', {
-  reply_markup: {
-    inline_keyboard: [
-      [{ text: '🔔 Notify me', callback_data: 'notify' }],
-      [{ text: '❓ Help', callback_data: 'help' }]
-    ]
-  }
+const { Telegraf } = require('telegraf');
+const bot = new Telegraf(process.env.BOT_TOKEN);
+
+bot.command('start', (ctx) => {
+    ctx.reply('Hello from BotAlto!');
 });
-```
 
-### 5. Dice Roll
-```javascript
-ctx.replyWithDice();
-```
-
-### 6. Weather (mock)
-```javascript
-const city = ctx.message.text.split(' ')[1] || 'Gujarat';
-ctx.reply(`🌤️ ${city}: Sunny, 28°C`);
-```
-
-### 7. URL Shortener
-```javascript
-const url = ctx.message.text.split(' ')[1];
-if (!url) return ctx.reply('Usage: /shorten <url>');
-ctx.reply(`Short link: https://tinyurl.com/xyz`);
-```
-
-### 8. CRON reminder (in-chat)
-```javascript
-setTimeout(() => ctx.reply('⏰ Reminder fired!'), 5000);
-```
-
-### 9. Random Joke
-```javascript
-const jokes = [
-  'Why don’t scientists trust atoms? Because they make up everything!',
-  'I would tell you a UDP joke, but you might not get it.'
-];
-ctx.reply(jokes[Math.floor(Math.random() * jokes.length)]);
-```
-
-### 10. Markdown / HTML Mix
-```javascript
-ctx.replyWithHTML(
-  '<b>Bold</b> & <i>Italic</i>\n<a href="https://bot.alto">Visit BotAlto</a>'
-);
-```
-
-### 11. Download & Forward File
-```javascript
-ctx.replyWithDocument({ source: 'https://example.com/report.pdf' });
-```
-
-### 12. Emoji Keyboard
-```javascript
-ctx.reply('Pick an emoji:', {
-  reply_markup: {
-    keyboard: [['😀', '😂', '😍'], ['❤️', '👍', '🎉']],
-    resize_keyboard: true
-  }
+bot.command('help', (ctx) => {
+    ctx.reply('This is a help message.');
 });
+
+bot.launch();
 ```
 
-### 13. Poll
-```javascript
-ctx.poll(
-  'Pick your favorite language',
-  ['JavaScript', 'Python', 'Go'],
-  { is_anonymous: false }
-);
-```
+## 🤝 Contributing
 
-### 14. Sticker Pack
-```javascript
-ctx.replyWithSticker('CAACAgIAAxkBAAE...');
-```
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-### 15. Send Audio
-```javascript
-ctx.replyWithAudio(
-  { url: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3' },
-  { title: 'Bell Ring' }
-);
-```
+### Development Guidelines
+- Follow TypeScript best practices
+- Write comprehensive tests
+- Update documentation
+- Follow conventional commits
+- Ensure code quality with ESLint and Prettier
 
+## 📄 License
 
-## Screenshots
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-*[Placeholder for dashboard screenshot]*
+## 🆘 Support
 
-![Dashboard](https://raw.githubusercontent.com/DevAryanPro/BotAlto-Telegram-Bot-Builder/refs/heads/main/Images/Screenshot%20(23).png)
+- **Documentation**: [Wiki](https://github.com/your-username/botalto-platform/wiki)
+- **Issues**: [GitHub Issues](https://github.com/your-username/botalto-platform/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/your-username/botalto-platform/discussions)
+- **Email**: support@botalto.com
 
-*[Placeholder for commands screenshot]*
+## 🙏 Acknowledgments
 
-![Commands](https://raw.githubusercontent.com/DevAryanPro/BotAlto-Telegram-Bot-Builder/refs/heads/main/Images/Screenshot%20(22).png)
-
-## Technical Details
-
-### Backend Architecture
-- Node.js with Express.js server
-- Telegraf.js for Telegram bot integration
-- In-memory storage for bots and commands (persistence coming soon)
-- REST API for frontend communication
-
-### Frontend Technology
-- Bootstrap 5 for responsive design
-- Lucide icons for clean UI
-- Vanilla JavaScript for interactivity
-- Modern, clean interface
-
-## Future Roadmap
-
-| Phase | Status | Highlights |
-|-------|--------|------------|
-| ✅ **v1.0.0** | **LIVE** | Core bot creator, hot-reload commands, start/stop per bot, zero-config |
-| ✅ **v1.1.0** | **LIVE** | SQLite / MongoDB persistence → bots & commands survive restarts |
-| 🔜 **v1.2.0** | **Next** | JWT or OAuth2 login → manage only **your** bots |
-| 🔜 **v1.3.0** | **Next** | Real-time usage stats, command heat-map, webhook health |
-| 🔜 **v2.0.0** | **Future** | Plugin marketplace (AI image gen, payments, CRON, etc.) |
-| 🔜 **v2.1.0** | **Future** | Multi-language UI (React-i18n) |
-| 🔜 **v2.2.0** | **Future** | Docker & Kubernetes auto-scaling for 24/7 fleets |
-| 🔜 **v2.3.0** | **Future** | Built-in CI/CD → push code via GitHub Actions |
-| 🔜 **v3.0.0** | **Vision** | AI Copilot → natural-language command generator |
+- [Nest.js](https://nestjs.com/) - Progressive Node.js framework
+- [TypeORM](https://typeorm.io/) - ORM for TypeScript and JavaScript
+- [Docker](https://www.docker.com/) - Containerization platform
+- [Telegram Bot API](https://core.telegram.org/bots/api) - Official Telegram Bot API
 
 ---
 
-### Version History
-| Version | Date       | Changes                     |
-|---------|------------|-----------------------------|
-| 1.0.0   | 2025-08-02 | Initial release             |
-| 1.1.0   | 2025-08-15 | MongoDB persistence → bots & commands survive restarts            |
-
-## Contributing
-
-We welcome contributions! Please fork the repository and submit pull requests. For major changes, please open an issue first to discuss what you'd like to change.
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
----
-
-**BotAlto** - Open Source Telegram Bot Platform Server  
-Developed with ❤️ by Kaiiddo
+**BotAlto** - Enterprise-grade Telegram Bot Hosting Platform  
+Built with ❤️ by the BotAlto Team
