@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/main.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "dist/main.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "dist/main.js"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": "3000",
+    "API_PREFIX": "api/v1"
+  },
+  "functions": {
+    "dist/main.js": {
+      "maxDuration": 30
+    }
+  }
+}

@@ -1,0 +1,13 @@
+build:
+  docker:
+    web: Dockerfile.backend
+    worker: Dockerfile.worker
+
+release:
+  command:
+    - npm run db:migrate
+    - npm run db:seed
+
+run:
+  web: npm run start:prod
+  worker: npm run worker:start

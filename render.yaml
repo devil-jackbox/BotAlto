@@ -1,0 +1,67 @@
+services:
+  - type: web
+    name: botalto-backend
+    env: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start:prod
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: API_PREFIX
+        value: api/v1
+      - key: JWT_SECRET
+        generateValue: true
+      - key: BCRYPT_ROUNDS
+        value: 12
+      - key: LOG_LEVEL
+        value: info
+      - key: DB_HOST
+        fromDatabase:
+          name: botalto-postgres
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: botalto-postgres
+          property: port
+      - key: DB_USERNAME
+        fromDatabase:
+          name: botalto-postgres
+          property: username
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: botalto-postgres
+          property: password
+      - key: DB_DATABASE
+        fromDatabase:
+          name: botalto-postgres
+          property: database
+      - key: REDIS_HOST
+        fromService:
+          type: redis
+          name: botalto-redis
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          type: redis
+          name: botalto-redis
+          property: port
+      - key: REDIS_PASSWORD
+        fromService:
+          type: redis
+          name: botalto-redis
+          property: password
+
+  - type: redis
+    name: botalto-redis
+    plan: free
+    maxmemoryPolicy: allkeys-lru
+
+databases:
+  - name: botalto-postgres
+    databaseName: botalto
+    user: botalto_user
+    plan: free

@@ -1,0 +1,14 @@
+[phases.setup]
+nixPkgs = ["nodejs_18", "postgresql_15", "redis"]
+
+[phases.install]
+cmds = ["npm ci --only=production"]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "npm run start:prod"
+
+[variables]
+NODE_ENV = "production"

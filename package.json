@@ -21,7 +21,8 @@
     "docker:stop": "docker-compose down",
     "db:migrate": "npm run typeorm migration:run",
     "db:generate": "npm run typeorm migration:generate",
-    "db:revert": "npm run typeorm migration:revert"
+    "db:revert": "npm run typeorm migration:revert",
+    "db:seed": "ts-node src/database/seed.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
